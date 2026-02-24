@@ -1,4 +1,18 @@
 defmodule Validacion do
+  @moduledoc """
+
+
+    Pensamiento computacional :
+    Descomposición: (validar credenciales, edad y cantidad de intentos).
+    Reconocimiento de patrones: Identificar que la validación de cada criterio sigue una estructura similar (condicionales).
+    Abstracción: Enfocarse en los aspectos esenciales de cada criterio de validación
+    Algoritmo: Crear un conjunto de pasos para validar cada criterio y determinar el resultado final.
+
+    Validación de acceso a un sistema basado en múltiples criterios:
+    - Credenciales válidas (si/no)
+    - Edad del usuario (debe ser mayor de 18 años)
+    - Cantidad de intentos (máximo 3 intentos)
+  """
   def main do
     nombre =
       "Ingrese nombre de usuario: "
@@ -16,13 +30,14 @@ defmodule Validacion do
       "Ingrese cantidad de intentos: "
       |> Util.ingresar(:entero)
 
-    validar_acceso(nombre, edad, credenciales, intentos)
+    resultado = validar_acceso(nombre, edad, credenciales, intentos)
+    mostrar_resultado(resultado)
   end
 
   def validar_acceso(nombre, edad, credenciales, intentos) do
     # Validar credenciales (unless)
-    unless credenciales do
-      {:error, "Acceso denegado: credenciales inválidas"}
+    unless credenciales != "si" do
+      {:error, "Acceso denegado: el usuario #{nombre} tiene credenciales inválidas"}
     else
       # Validar edad (if)
       if edad < 18 do
@@ -37,4 +52,15 @@ defmodule Validacion do
       end
     end
   end
+
+  def mostrar_resultado({resultado}) do
+    {:ok, mensaje} = resultado
+    IO.puts(mensaje)
+  end
+
+  def mostrar_resultado({:error, mensaje}) do
+    IO.puts(mensaje)
+  end
 end
+
+Validacion.main()
