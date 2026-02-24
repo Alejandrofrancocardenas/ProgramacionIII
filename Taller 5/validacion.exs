@@ -36,7 +36,7 @@ defmodule Validacion do
 
   def validar_acceso(nombre, edad, credenciales, intentos) do
     # Validar credenciales (unless)
-    unless credenciales != "si" do
+    if credenciales != "si" do
       {:error, "Acceso denegado: el usuario #{nombre} tiene credenciales inválidas"}
     else
       # Validar edad (if)
